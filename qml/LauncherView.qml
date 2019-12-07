@@ -51,6 +51,11 @@ Item {
                 font.pixelSize: 10
                 anchors.centerIn: parent
             }
+
+            PlainButton {
+                label: "errors"
+                onClicked: errorLog.open()
+            }
         }
     }
         

@@ -1,6 +1,7 @@
 package storage
 
 import (
+	"bufio"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -12,6 +13,9 @@ const (
 	// configName is the name of the config.
 	configName = "config.json"
 
+	// errorLog is the name of the error log.
+	errorLog = "errors.log"
+
 	// Permissions are the directory permissions for storage.
 	Permissions = 0755
 )
@@ -21,6 +25,7 @@ type Store interface {
 	Load() error
 	Read() (*Config, error)
 	Write(config *Config) error
+	GetErrors(lineCount int) ([]string, error)
 }
 
 type store struct {
@@ -85,6 +90,28 @@ func (s *store) Load() error {
 	}
 
 	return nil
+}
+
+// GetErrors ...
+func (s *store) GetErrors(lineCount int) ([]string, error) {
+	file, err := os.Open(fmt.Sprintf("%s/%s", s.path, errorLog))
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	var lines = make([]string, 0)
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		lines = append(lines, scanner.Text())
+	}
+
+	if err := scanner.Err(); err != nil {
+		return nil, err
+	}
+
+	// Return the last n lines.
+	return lines[len(lines)-lineCount:], nil
 }
 
 func (s *store) configExists() (bool, error) {

@@ -2,6 +2,7 @@ package bridge
 
 import (
 	"encoding/json"
+	"fmt"
 
 	"github.com/nokka/slashdiablo-launcher/config"
 	"github.com/nokka/slashdiablo-launcher/log"
@@ -21,12 +22,15 @@ type ConfigBridge struct {
 
 	// Properties.
 	_ string `property:"buildVersion"`
+	_ string `property:"errorLog"`
+	_ bool   `property:"errorsLoading"`
 
 	// Slots.
 	_ func()                 `slot:"addGame"`
 	_ func(body string) bool `slot:"upsertGame"`
 	_ func(id string)        `slot:"deleteGame"`
 	_ func() bool            `slot:"persistGameModel"`
+	_ func()                 `slot:"getErrorLog"`
 }
 
 // Connect will connect the QML signals to functions in Go.
@@ -35,6 +39,7 @@ func (c *ConfigBridge) Connect() {
 	c.ConnectAddGame(c.addGame)
 	c.ConnectDeleteGame(c.deleteGame)
 	c.ConnectPersistGameModel(c.persistGameModel)
+	c.ConnectGetErrorLog(c.getErrorLog)
 }
 
 // addGame will add a game to the game model.
@@ -76,7 +81,26 @@ func (c *ConfigBridge) persistGameModel() bool {
 	return true
 }
 
-// NewConfig ...
+func (c *ConfigBridge) getErrorLog() {
+	fmt.Println("ERROR LOG RUNNING")
+	go func() {
+		log, err := c.config.GetErrorLog(25)
+		if err != nil {
+			return
+		}
+
+		var aggregated string
+		for _, l := range log {
+			aggregated += fmt.Sprintf("%s\n", l)
+		}
+
+		c.SetErrorLog(aggregated)
+	}()
+
+	return
+}
+
+// NewConfig creates a new config bridge with all dependencies.
 func NewConfig(cs config.Service, gm *config.GameModel, logger log.Logger) *ConfigBridge {
 	configBridge := NewConfigBridge(nil)
 

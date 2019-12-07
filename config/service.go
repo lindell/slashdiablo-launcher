@@ -24,7 +24,11 @@ type Service interface {
 	// PersistGameModel will persist the current game model to the persistent store.
 	PersistGameModel() error
 
+	// Update the gateway for Diablo II.
 	UpdateGateway(gateway string) error
+
+	// Get the error log.
+	GetErrorLog(lineCount int) ([]string, error)
 }
 
 type service struct {
@@ -190,6 +194,16 @@ func (s *service) UpdateGateway(gateway string) error {
 	}
 
 	return nil
+}
+
+// GetErrorLog will fetch the number of entries from the error log.
+func (s *service) GetErrorLog(lineCount int) ([]string, error) {
+	lines, err := s.store.GetErrors(lineCount)
+	if err != nil {
+		return nil, err
+	}
+
+	return lines, nil
 }
 
 // NewService returns a service with all the dependencies.

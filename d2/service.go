@@ -107,7 +107,7 @@ func (s *Service) Exec() error {
 			// Stall between each exec, otherwise Diablo won't start properly in multiple instances.
 			time.Sleep(1 * time.Second)
 
-			// The second argument is a channel, listened on by listenForGameStates().
+			// The third argument is a channel, listened on by listenForGameStates().
 			pid, err := launch(g.Location, g.Flags, s.gameStates)
 			if err != nil {
 				return err
