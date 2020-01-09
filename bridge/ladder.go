@@ -1,8 +1,8 @@
 package bridge
 
 import (
-	"github.com/nokka/slashdiablo-launcher/ladder"
-	"github.com/nokka/slashdiablo-launcher/log"
+	"github.com/lindell/slashdiablo-launcher/ladder"
+	"github.com/lindell/slashdiablo-launcher/log"
 	"github.com/therecipe/qt/core"
 )
 

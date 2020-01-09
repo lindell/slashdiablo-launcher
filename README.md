@@ -1,8 +1,8 @@
 
 # Slashdiablo launcher
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/nokka/slashdiablo-launcher)](https://goreportcard.com/report/github.com/nokka/slashdiablo-launcher)
-[![GoDoc](https://godoc.org/github.com/nokka/slashdiablo-launcher?status.svg)](https://godoc.org/github.com/nokka/slashdiablo-launcher)
+[![Go Report Card](https://goreportcard.com/badge/github.com/lindell/slashdiablo-launcher)](https://goreportcard.com/report/github.com/lindell/slashdiablo-launcher)
+[![GoDoc](https://godoc.org/github.com/lindell/slashdiablo-launcher?status.svg)](https://godoc.org/github.com/lindell/slashdiablo-launcher)
 
 ![launcher screenshot](/docs/launcher.png)
 
@@ -54,10 +54,10 @@ Use the [installer](https://download.qt.io/official_releases/qt/5.13/5.13.0/qt-o
 $ go get -u -v -tags=no_env github.com/therecipe/qt/cmd/...
 
 # Download the repository with dependencies
-$ go get -d -u -v github.com/nokka/slashdiablo-launcher
+$ go get -d -u -v github.com/lindell/slashdiablo-launcher
 
 # Build the launcher
-$ cd $(go env GOPATH)/src/github.com/nokka/slashdiablo-launcher
+$ cd $(go env GOPATH)/src/github.com/lindell/slashdiablo-launcher
 $ qtdeploy build
 
 # Start launcher (different depending on OS)
@@ -80,5 +80,5 @@ $ qtdeploy -docker build windows_64_static
 ### MacOS (from MacOS only)
 
 ```bash
-$ qtdeploy build darwin github.com/nokka/slashdiablo-launcher
+$ qtdeploy build darwin github.com/lindell/slashdiablo-launcher
 ```

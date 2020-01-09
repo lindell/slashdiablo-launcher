@@ -1,0 +1,26 @@
+name: Go
+on: [push]
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go 1.13
+        uses: actions/setup-go@v1
+        with:
+          go-version: 1.13
+
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v1
+
+      - name: Install QT
+        run: sudo apt-get install qt5-default
+
+      - name: Install QT for Go
+        run: go get -u -v -tags=no_env github.com/therecipe/qt/cmd/...
+
+      - name: Install dependecies
+        run: go get -d -u -v .
+
+      - name: Build
+        run: qtdeploy build

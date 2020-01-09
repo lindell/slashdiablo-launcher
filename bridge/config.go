@@ -3,8 +3,8 @@ package bridge
 import (
 	"encoding/json"
 
-	"github.com/nokka/slashdiablo-launcher/config"
-	"github.com/nokka/slashdiablo-launcher/log"
+	"github.com/lindell/slashdiablo-launcher/config"
+	"github.com/lindell/slashdiablo-launcher/log"
 	"github.com/therecipe/qt/core"
 )
 

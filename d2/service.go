@@ -11,10 +11,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/nokka/slashdiablo-launcher/clients/slashdiablo"
-	"github.com/nokka/slashdiablo-launcher/config"
-	"github.com/nokka/slashdiablo-launcher/log"
-	"github.com/nokka/slashdiablo-launcher/storage"
+	"github.com/lindell/slashdiablo-launcher/clients/slashdiablo"
+	"github.com/lindell/slashdiablo-launcher/config"
+	"github.com/lindell/slashdiablo-launcher/log"
+	"github.com/lindell/slashdiablo-launcher/storage"
 )
 
 // Service is responsible for all things related to the Slashdiablo ladder.
